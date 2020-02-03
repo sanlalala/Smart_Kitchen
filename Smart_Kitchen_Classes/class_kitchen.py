@@ -1,16 +1,17 @@
 import json
 import class_furniture
 import class_appliance
-import class_tools
+import Smart_Kitchen_Classes.class_tools as tools
 
 
 class Kitchen:
 
-    def __init__(self, name):
+    def __init__(self, name, event_queue):
         self.name = name
         self.furnitureList = []
         self.applianceList = []
         self.toolList = []
+        self.eventQueue = event_queue
 
     @staticmethod
     def initialize_furniture(self, data):
@@ -51,19 +52,21 @@ class Kitchen:
 
     @staticmethod
     def initialize_tools(self, data):
-        for key, value in data.items():
-            if key == "container":
-                for x in data["container"]:
-                    item = class_tools.Container(x["tool_id"], x["tool_type"], x["usage_tags"],
-                                                 x["capacity"])
-                    self.toolList.append(item)
-                    for storage in self.furnitureList:
-                        if storage.name == x["location"]:
-                            storage.putItem(item)
+        for tool in data:
+            if tool['is_in_location'] == "true":
+                is_in_location = True
+            else:
+                is_in_location = False
+            item = tools.Tool(tool['tool_id'], tool['tool_type'], tool['usage_tags'], tool['location'], is_in_location)
+            self.toolList.append(item)
+
+            for storage in self.furnitureList:
+                if storage.name == item.location:
+                    storage.putItem(item)
 
     @staticmethod
     def initialize_kitchen_from_config(self):
-        with open("Kitchen_Config/config.json") as config:
+        with open("../Kitchen_Config/config.json") as config:
             kitchen_config = json.load(config)
 
         self.initialize_interactive_appliances(self, kitchen_config["interactiveAppliance"])
@@ -87,3 +90,18 @@ class Kitchen:
             for item in items:
                 if item.tool_id == item_id:
                     return storage.name
+
+    def getToolById(self, tool_id):
+        for tool in self.toolList:
+            if tool.tool_id == tool_id:
+                return tool
+
+    def updateTool(self, data):
+        for tool in self.toolList:
+            if data[0] == tool.tool_id:
+                if tool.is_in_location:
+                    tool.is_in_location = False
+                    self.eventQueue.put([data[0], tool.tool_type, tool.location, "Take out"])
+                else:
+                    tool.is_in_location = True
+                    self.eventQueue.put([data[0], tool.tool_type, tool.location, "Put in"])

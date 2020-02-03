@@ -10,7 +10,7 @@ class LslEventBroadcaster(Thread):
         self.event_queue = event_queue
         outlet_info = pylsl.StreamInfo("Kitchen Devices",
                                    "event markers",
-                                   3,
+                                   4,
                                    pylsl.IRREGULAR_RATE,
                                    pylsl.cf_string,
                                    "ID_Kitchen_Devices")
@@ -19,21 +19,26 @@ class LslEventBroadcaster(Thread):
         channels = outlet_info.desc().append_child("channels")
 
         devices_events_channel = channels.append_child("channel")
-        devices_events_channel.append_child_value("label", "Device Location")
-        devices_events_channel.append_child_value("type", "event markers")
-        devices_events_channel.append_child_value("Zusatzinfo", "Location des Objekts")
-
-        devices_events_channel = channels.append_child("channel")
         devices_events_channel.append_child_value("label", "Device ID")
         devices_events_channel.append_child_value("type", "event markers")
-        devices_events_channel.append_child_value("Zusatzinfo", "ID des Objekts")
+        devices_events_channel.append_child_value("Zusatzinfo", "ID")
+
+        devices_events_channel = channels.append_child("channel")
+        devices_events_channel.append_child_value("label", "Device Type")
+        devices_events_channel.append_child_value("type", "event markers")
+        devices_events_channel.append_child_value("Zusatzinfo", "Device Type")
+
+        devices_events_channel = channels.append_child("channel")
+        devices_events_channel.append_child_value("label", "Device Location")
+        devices_events_channel.append_child_value("type", "event markers")
+        devices_events_channel.append_child_value("Zusatzinfo", "Device Location")
 
         devices_events_channel = channels.append_child("channel")
         devices_events_channel.append_child_value("label", "Nutzer Aktion")
         devices_events_channel.append_child_value("type", "event markers")
         devices_events_channel.append_child_value("Zusatzinfo", "put in / take out")
 
-        outlet = pylsl.StreamOutlet(outlet_info)
+        self.outlet = pylsl.StreamOutlet(outlet_info)
 
         Thread.__init__(self)
         self.daemon = True
@@ -47,5 +52,5 @@ class LslEventBroadcaster(Thread):
                 # No new input
                 pass
             else:
-                print(self.event_queue.get())
+                self.outlet.push_sample(input_value)
 

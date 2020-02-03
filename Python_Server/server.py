@@ -1,18 +1,36 @@
 #!/usr/bin/env python3
 
 import socket
+from threading import Thread
+import time
+import pickle
 
-HOST = '192.168.178.52'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print('Connected by', addr)
+class SocketServer(Thread):
+
+    def __init__(self, host, port, myKitchen):
+        self.host = host
+        self.port = port
+        self.kitchen = myKitchen
+        Thread.__init__(self)
+        self.daemon = True
+        self.start()
+
+    def run(self):
         while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            conn.sendall(data)
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.bind((self.host, self.port))
+                s.listen()
+                conn, addr = s.accept()
+                with conn:
+                    print('Connected by', addr)
+                    while True:
+                        data = conn.recv(1024)
+                        if not data:
+                            break
+                        data = pickle.loads(data)
+                        print(data)
+                        self.kitchen.updateTool(data)
+                        data = pickle.dumps(data)
+                        conn.sendall(data)
+

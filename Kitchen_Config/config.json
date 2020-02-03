@@ -51,15 +51,13 @@
   "groceries": {
 
     },
-  "tools":{
-    "container":
+  "tools":
     [
-      {"tool_id": "319461594459", "tool_type": "Dosenöffner", "usage_tags": "", "location": "U_4_0", "capacity": "2000ml"},
-      {"tool_id": "384192513797", "tool_type": "Schüssel Tomaten", "usage_tags": "", "location": "U_1_0", "capacity": "1000ml"},
-      {"tool_id": "112148420225", "tool_type": "Salz", "usage_tags": "", "location": "U_6_0", "capacity": "500ml"},
-      {"tool_id": "453834672099", "tool_type": "Oregano", "usage_tags": "", "location": "U_4_0", "capacity": "100ml"},
-      {"tool_id": "869502621128", "tool_type": "Kochlöffel", "usage_tags": "", "location": "U_4_0", "capacity": "200ml"},
-      {"tool_id": "118337641715", "tool_type": "Messer", "usage_tags": "", "location":  "U_4_0", "capacity": "300ml"}
+      {"tool_id": "319461594459", "tool_type": "Dosenoeffner", "usage_tags": "", "location": "U_4_0", "is_in_location": "true"},
+      {"tool_id": "384192513797", "tool_type": "Schuessel Tomaten", "usage_tags": "", "location": "U_1_0", "is_in_location": "true"},
+      {"tool_id": "112148420225", "tool_type": "Salz", "usage_tags": "", "location": "U_6_0", "is_in_location": "true"},
+      {"tool_id": "453834672099", "tool_type": "Oregano", "usage_tags": "", "location": "U_4_0", "is_in_location": "true"},
+      {"tool_id": "869502621128", "tool_type": "Kochloeffel", "usage_tags": "", "location": "U_4_0", "is_in_location": "true"},
+      {"tool_id": "118337641715", "tool_type": "Messer", "usage_tags": "", "location":  "U_4_0", "is_in_location": "true"}
     ]
-  }
 }

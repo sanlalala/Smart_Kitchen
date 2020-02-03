@@ -2,7 +2,9 @@
   <dictionary name="matth">
     <words>
       <w>clientsocket</w>
+      <w>serv</w>
       <w>serversocket</w>
+      <w>unbekannt</w>
     </words>
   </dictionary>
 </component>

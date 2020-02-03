@@ -55,7 +55,7 @@ class Kitchen:
             if key == "container":
                 for x in data["container"]:
                     item = class_tools.Container(x["tool_id"], x["tool_type"], x["usage_tags"],
-                                                   x["capacity"])
+                                                 x["capacity"])
                     self.toolList.append(item)
                     for storage in self.furnitureList:
                         if storage.name == x["location"]:

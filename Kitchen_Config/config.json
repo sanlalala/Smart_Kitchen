@@ -59,5 +59,10 @@
       {"tool_id": "453834672099", "tool_type": "Oregano", "usage_tags": "", "location": "U_4_0", "is_in_location": "true"},
       {"tool_id": "869502621128", "tool_type": "Kochloeffel", "usage_tags": "", "location": "U_4_0", "is_in_location": "true"},
       {"tool_id": "118337641715", "tool_type": "Messer", "usage_tags": "", "location":  "U_4_0", "is_in_location": "true"}
+	  {"tool_id": "118337641715", "tool_type": "Schneidbrett", "usage_tags": "", "location":  "U_1_0", "is_in_location": "true"}
+      {"tool_id": "118337641715", "tool_type": "Schuessel Gemuese", "usage_tags": "", "location":  "U_1_0", "is_in_location": "true"}
+      {"tool_id": "118337641715", "tool_type": "Nudelholz", "usage_tags": "", "location":  "U_4_0", "is_in_location": "true"}
+      {"tool_id": "118337641715", "tool_type": "Schuessel Salat", "usage_tags": "", "location":  "U_1_0", "is_in_location": "true"}
+
     ]
 }

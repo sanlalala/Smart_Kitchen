@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     while True:
         # Loop for testing and keeping Server and Broadcast Thread alive
-        event_queue.put(["Test1", "Test2", "Test3", "Test4"])
+        # event_queue.put(["Test1", "Test2", "Test3", "Test4"])
         time.sleep(5)
 
 

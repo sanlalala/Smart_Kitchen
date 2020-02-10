@@ -9,8 +9,9 @@ PORT = 65432            # The port used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     event = ["384192513797", "U_1_0"]
-    data = pickle.dump(event)
+    data = pickle.dumps(event)
     s.sendall(data)
-    data = s.recv(1024)
+    # data = s.recv(1024)
+    s.close()
 
-print('Received', repr(data))
+#print('Received', repr(data))

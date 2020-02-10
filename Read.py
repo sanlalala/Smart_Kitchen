@@ -22,7 +22,7 @@ while True:
         event = [str(id), "U_1_0"]
         data = pickle.dumps(event)
         s.sendall(data)
-        data = s.recv(1024)
+        # data = s.recv(1024)
 
-    print('Received', repr(data))
+    # print('Received', repr(data))
     time.sleep(1)
